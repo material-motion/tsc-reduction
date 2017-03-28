@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "Apache-2.0",
+  "scripts": {
+    "pundle": "$( yarn bin )/pundle",
+    "start": "yarn run pundle -- --dev",
+    "clean": "rm -rf ./site/dist/*; mkdir -p ./site/dist/",
+    "lint": "../../node_modules/.bin/tslint -c ../../tslint.json --project tsconfig.json --type-check",
+    "build": "yarn run clean; yarn run pundle",
+    "deploy": "yarn run build; $( yarn bin )/firebase deploy"
+  },
   "dependencies": {
     "pundle": "2.0.0-beta12",
     "pundle-api": "2.0.0-beta12",

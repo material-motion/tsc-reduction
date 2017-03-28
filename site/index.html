@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      TypeScript Regression #14890
+    </title>
+    <meta
+      name = 'viewport'
+      content = '
+        width=device-width,
+        minimum-scale=1.0
+      '
+    />
+    <link
+      rel = 'icon'
+      type = 'image/png'
+      href = '/images/favicon.png'
+    />
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Roboto|Material+Icons');
+
+      * {
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+      }
+
+      body {
+        margin: 0px;
+        min-height: 100%;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id = 'root'></div>
+  </body>
+  <script>
+    [
+    ].forEach(
+      function ([test, polyfill]) {
+        if (!test) {
+          injectScript(polyfill);
+        }
+      }
+    );
+
+    injectScript('/dist/bundle.js');
+
+    function injectScript(src) {
+      // Set async=false to maintain execution order
+      // https://www.html5rocks.com/en/tutorials/speed/script-loading/
+      const script = document.createElement('script');
+      script.setAttribute('src', src);
+      script.async = false;
+
+      document.head.appendChild(script);
+    }
+  </script>
+</html>
